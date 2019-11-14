@@ -17,6 +17,7 @@ django = "*"
 django-crispy-forms = "*"
 gunicorn = "*"
 pytest-django = "*"
+python-decouple = "*"
 
 [requires]
 python_version = "3.7"
