@@ -1,0 +1,61 @@
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <div class="container">
+      <a href="{% url 'home' %}" class="navbar-brand value-brand">CoopSys</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'home' %}">About</a>
+              </li>
+            <li class="nav-item">
+                  <a class="nav-link" href="{% url 'home' %}">Contact</a>
+            </li>
+          </ul>
+          {% if user.is_authenticated %}
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <span class="navbar-text username-divider"></span>
+            </li>
+
+            {% if  request.user.first_name or request.user.first_name.strip %}
+                <li>
+                  <span class="navbar-text">Hi {{ request.user.first_name }}</span>
+                </li>
+            {% else %}
+                <li>
+                  <span class="navbar-text">Hi {{ request.user.email }}</span>
+                </li>
+            {% endif %}
+
+            <li>
+              <span class="navbar-text username-divider"></span>
+            </li>
+            <li>
+              <a href="{% url 'profile' user.id %}">
+                <span data-toggle="tooltip" data-placement="bottom" data-container="body" title="Account profile">
+                  <span class="icon"><i class="fa fa-cog"></i></span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'logout' %}">
+                <span data-toggle="tooltip" data-placement="bottom" data-container="body" title="Sign out">
+                  <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+                </span>
+              </a>
+            </li>
+          </ul>
+        {% else %}
+          <a href="{% url 'home' %}" title="Sign in" class="btn btn-outline-success navbar-btn navbar-right">Sign in</a>
+          <a href="{% url 'home' %}" title="Sign up" class="btn btn-outline-primary navbar-btn navbar-right" style="margin-right: 5px;">Sign up</a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+</header>
