@@ -1,5 +1,3 @@
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
 from django import forms
 
 from coop.base.models import Cooperative, Unit
@@ -28,8 +26,6 @@ class CooperativeForm(forms.ModelForm):
 
 
 class UnitForm(forms.ModelForm):
-    #cooperative_id = forms.CharField(max_length=5, label='Cooperative Name') # Select(choices=(('1', 'TESTE'), ('2', 'NEW TESTE')))
-    #unit_number = forms.CharField(max_length=5, label='Unit Number')
 
     class Meta:
         model = Unit
@@ -37,8 +33,3 @@ class UnitForm(forms.ModelForm):
         labels = {
             'cooperative_id': 'Cooperative name',
         }
-
-    helper = FormHelper()
-    helper.form_method = 'POST'
-    helper.add_input(Submit('Submit', 'Submit', css_class='btn-primary'))
-
