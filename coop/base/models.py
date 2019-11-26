@@ -2,13 +2,16 @@ from django.db import models
 
 
 class Cooperative(models.Model):
-    cooperative_name = models.CharField(max_length=60, unique=True)
+    cooperative_name = models.CharField(max_length=60, unique=True, null=False)
 
     class Meta:
         ordering = ['cooperative_name']
 
     def set_cooperative_name(self, name):
         self.cooperative_name = name
+
+    def __str__(self):
+        return self.cooperative_name
 
 
 class Unit(models.Model):
@@ -17,3 +20,6 @@ class Unit(models.Model):
 
     class Meta:
         ordering = ['cooperative_id', 'unit_number']
+
+    def __str__(self):
+        return self.unit_number
