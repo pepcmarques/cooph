@@ -31,7 +31,10 @@ DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = ['*']
 
-AUTH_USER_MODEL = 'core.User'
+AUTH_USER_MODEL = 'accounts.User'
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 # Application definition
 
@@ -46,6 +49,7 @@ INSTALLED_APPS = [
 
     'crispy_forms',
 
+    'coop.accounts',
     'coop.core',
     'coop.base',
 ]

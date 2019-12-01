@@ -25,12 +25,8 @@ urlpatterns = [
     path('coop/', include('coop.base.urls')),
 
     # TODO
-    path('profile/<int:user_id>', home, name='profile'),
-    path('signup/', home, name='signup'),
-    path('logout/', home, name='logout'),
-    path('create/', home, name='create_user'),
-    path('update/<int:user_id>/', home, name='update_user'),
-    path('delete/<int:user_id>/', home, name='delete_user'),
+    path('accounts/', include('coop.accounts.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
 
 if settings.DEBUG:
