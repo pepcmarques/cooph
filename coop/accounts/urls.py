@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 
 from coop.accounts.views import SignupView, update_user, delete_user
 from coop.core.views import home

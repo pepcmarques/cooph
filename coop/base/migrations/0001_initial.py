@@ -27,7 +27,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('unit_number', models.CharField(max_length=5)),
-                ('cooperative_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='cooperative_id', to='base.Cooperative')),
+                ('cooperative_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                                     related_name='cooperative_id', to='base.Cooperative')),
             ],
             options={
                 'ordering': ['cooperative_id', 'unit_number'],
