@@ -1,11 +1,12 @@
 from django.urls import path
 
-from coop.accounts.views import SignupView, update_user, delete_user
+from coop.accounts.views import SignupView, update_user, delete_user, LoginView
 from coop.core.views import home
 
 app_name = 'accounts'
 
 urlpatterns = [
+        path('login/', LoginView.as_view(), name='login'),
         path('signup/', SignupView.as_view(), name='signup'),
         path('profile/<int:user_id>', update_user, name='profile'),
         path('create/', home, name='create_user'),
