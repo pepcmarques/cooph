@@ -3,6 +3,7 @@ from django.urls import path
 from coop.accounts.views import SignupView, update_user, delete_user
 from coop.core.views import home
 
+app_name = 'accounts'
 
 urlpatterns = [
         path('signup/', SignupView.as_view(), name='signup'),

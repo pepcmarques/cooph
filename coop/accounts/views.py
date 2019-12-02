@@ -70,7 +70,7 @@ def update_user(request, user_id):
     form = UsersUpdateForm(request.POST or None, instance=user)
     if form.is_valid():
         form.save()
-        return redirect(reverse('home'))
+        return redirect(reverse('base:home'))
     return render(request, 'user-form.html', {'form': form, 'user': user})
 
 

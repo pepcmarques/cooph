@@ -11,6 +11,6 @@
     </form>
 
     {% if user %}
-        <a href="{% url 'delete_user' user.id %}">Delete</a>
+        <a href="{% url 'accounts:delete_user' user.id %}">Delete</a>
     {% endif %}
 {% endblock %}

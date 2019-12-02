@@ -1,20 +1,20 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <div class="container">
-      <a href="{% url 'home' %}" class="navbar-brand value-brand">CoopSys</a>
+      <a href="{% url 'base:home' %}" class="navbar-brand value-brand">CoopSys</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
               <li class="nav-item">
-                  <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="{% url 'base:home' %}">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="{% url 'home' %}">About</a>
+                  <a class="nav-link" href="{% url 'base:home' %}">About</a>
               </li>
             <li class="nav-item">
-                  <a class="nav-link" href="{% url 'home' %}">Contact</a>
+                  <a class="nav-link" href="{% url 'base:home' %}">Contact</a>
             </li>
           </ul>
           {% if user.is_authenticated %}
@@ -37,7 +37,7 @@
               <span class="navbar-text username-divider"></span>
             </li>
             <li>
-              <a href="{% url 'profile' user.id %}">
+              <a href="{% url 'accounts:profile' user.id %}">
                 <span data-toggle="tooltip" data-placement="bottom" data-container="body" title="Account profile">
                   <span class="icon"><i class="fa fa-cog"></i></span>
                 </span>
@@ -53,7 +53,7 @@
           </ul>
         {% else %}
           <a href="{% url 'login' %}" title="Sign in" class="btn btn-outline-success navbar-btn navbar-right">Sign in</a>
-          <a href="{% url 'signup' %}" title="Sign up" class="btn btn-outline-primary navbar-btn navbar-right" style="margin-right: 5px;">Sign up</a>
+          <a href="{% url 'accounts:signup' %}" title="Sign up" class="btn btn-outline-primary navbar-btn navbar-right" style="margin-right: 5px;">Sign up</a>
         {% endif %}
       </div>
     </div>

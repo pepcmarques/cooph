@@ -17,11 +17,9 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
 
-from coop.core.views import home
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home, name="home"),
+    path('', include('coop.base.urls')),
     path('coop/', include('coop.base.urls')),
 
     # TODO
