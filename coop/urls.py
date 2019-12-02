@@ -20,7 +20,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('coop.base.urls')),
-    path('coop/', include('coop.base.urls')),
 
     # TODO
     path('accounts/', include('coop.accounts.urls')),

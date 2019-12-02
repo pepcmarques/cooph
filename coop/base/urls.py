@@ -7,6 +7,6 @@ app_name = 'base'
 
 urlpatterns = [
     path('', home, name='home'),
-    path('create/', CreateCooperative.as_view(), name='create_coop'),
-    path('unit/create/', CreateUnit.as_view(), name='create_unit')
+    path('coop/create/', CreateCooperative.as_view(), name='create_coop'),
+    path('coop/unit/create/', CreateUnit.as_view(), name='create_unit')
 ]
