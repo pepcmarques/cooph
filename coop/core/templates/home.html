@@ -3,5 +3,10 @@
 {% load static from staticfiles %}
 
 {% block content %}
-    <h1>We are here!</h1>
-{%endblock content %}
+    {% if not message %}
+        <h1>We are here!</h1>
+    {% else %}
+        <h3>{{ message }}</h3>
+    {% endif %}
+
+{% endblock content %}
