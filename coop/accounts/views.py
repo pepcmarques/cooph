@@ -83,7 +83,7 @@ def activate(request, uidb64, token):
         return render(request,  'home.html',
                       {'message': "Thank you for your email confirmation. Now you can login your account."})
     else:
-        return render(request, 'home.html', {'messages': 'Activation link is invalid!'})
+        return render(request, 'home.html', {'message': 'Activation link is invalid!'})
 
 
 def profile(request, user_id):
