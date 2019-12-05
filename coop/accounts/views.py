@@ -63,8 +63,8 @@ def signup(request):
                         mail_subject, message, to=[to_email]
             )
             email.send()
-            return render(request, 'home.html', {'message': 'Please confirm your email address to complete '
-                                                            'the registration'})
+            return render(request, 'home.html', {'messages': ['Please confirm your email address to complete '
+                                                            'the registration']})
     else:
         form = SignupForm()
     return render(request, 'signup.html', {'form': form})
@@ -81,9 +81,9 @@ def activate(request, uidb64, token):
         user.save()
         login(request, user)
         return render(request,  'home.html',
-                      {'message': "Thank you for your email confirmation. <p/>Now you can login your account."})
+                      {'messages': ["Thank you for your email confirmation. <p/>Now you can login your account."]})
     else:
-        return render(request,  'home.html', {'message': 'Activation link is invalid!'})
+        return render(request,  'home.html', {'messages': ['Activation link is invalid!']})
 
 
 def profile(request, user_id):
