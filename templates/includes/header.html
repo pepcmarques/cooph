@@ -52,10 +52,19 @@
             </li>
           </ul>
         {% else %}
-          <a href="{% url 'login' %}" title="Sign in" class="btn btn-outline-success navbar-btn navbar-right" data-toggle="modal" data-target="#myModal">Sign in</a>
+          <a href="{% url 'accounts:login' %}" title="Sign in" class="btn btn-outline-success navbar-btn navbar-right">Sign in</a>
           <a href="{% url 'accounts:signup' %}" title="Sign up" class="btn btn-outline-primary navbar-btn navbar-right" style="margin-right: 5px;">Sign up</a>
         {% endif %}
       </div>
     </div>
   </nav>
+
+
+
+
+
+
+
+
+
 </header>
