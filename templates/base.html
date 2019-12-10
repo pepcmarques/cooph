@@ -43,9 +43,11 @@
 
     <main>
       <div class="container">
-        <div class="messages-container">
-          {% include 'includes/messages.html' %}
-        </div>
+        {% if message %}
+          <div class="messages-container">
+            {% include 'includes/messages.html' %}
+          </div>
+        {% endif %}
 
         <div class="section">
           {% block content %}
