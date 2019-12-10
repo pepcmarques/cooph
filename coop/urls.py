@@ -20,8 +20,8 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('coop.base.urls')),
+    path('messaging/', include('coop.messaging.urls')),
 
-    # TODO
     path('accounts/', include('coop.accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
 ]

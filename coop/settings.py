@@ -50,8 +50,9 @@ INSTALLED_APPS = [
     'crispy_forms',
 
     'coop.accounts',
-    'coop.core',
     'coop.base',
+    'coop.core',
+    'coop.messaging',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

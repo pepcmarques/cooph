@@ -1,0 +1,40 @@
+{% extends 'base.html'%}
+
+{% load crispy_forms_tags %}
+
+{% load static from staticfiles %}
+
+{% block content %}
+	<h2>Messages</h2>
+	{% if message_list %}
+		<table class="table table-hover">
+			<thead class="thead-dark">
+    			<tr>
+      				<th scope="col">#</th>
+      				<th scope="col">Request</th>
+      				<th scope="col">From</th>
+      				<th scope="col">Note</th>
+      				<th scope="col">Created on</th>
+    			</tr>
+  			</thead>
+			<tbody>
+				{% for item in message_list %}
+					<tr>
+						<td>{{ forloop.counter }}</td>
+						<td>{{ item.get_request_display }}</td>
+						<td>{{ item.message_from }}</td>
+						<td>{{ item.note }}</td>
+						<td>{{ item.created }}</td>
+					</tr>
+					{% endfor %}
+			</tbody>
+		</table>
+	{% else %}
+    	<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    		<strong>No messages</strong>
+    		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      		<span aria-hidden="true">&times;</span>
+    		</button>
+  		</div>
+	{% endif %}
+{% endblock content %}
