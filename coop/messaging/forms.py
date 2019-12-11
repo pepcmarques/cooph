@@ -6,9 +6,9 @@ from coop.messaging.models import Message
 class MessagingForm(forms.ModelForm):
     class Meta:
         model = Message
-        fields = ['request', 'note']
+        fields = ['task', 'note']
         labels = {
-            'request': "Request",
+            'task': "Task",
             'note': "Note",
         }
         widgets = {
