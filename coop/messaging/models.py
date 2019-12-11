@@ -7,7 +7,17 @@ from coop.accounts.models import User
 from enum import Enum
 
 
-class MessageChoice(Enum):   # A subclass of Enum
+class MessageStatusChoice(Enum):
+    OPEN = "Open"
+    DONE = "Done"
+    REJECT = "Reject"
+
+    @classmethod
+    def choices(cls):
+        return [(key.name, key.value) for key in cls]
+
+
+class MessageTaskChoice(Enum):
     CREATE_COOP = "Create Cooperative Housing"
 
     @classmethod
@@ -18,7 +28,9 @@ class MessageChoice(Enum):   # A subclass of Enum
 class Message(models.Model):
     message_from = models.ForeignKey(User, on_delete=models.CASCADE, related_name='message_from')
     message_to = models.ForeignKey(User, on_delete=models.CASCADE, related_name='message_to')
-    task = models.CharField(max_length=15, choices=MessageChoice.choices())
+    status = models.CharField(max_length=6, choices=MessageStatusChoice.choices(),
+                              default=MessageStatusChoice.choices()[0][0])
+    task = models.CharField(max_length=15, choices=MessageTaskChoice.choices())
     note = models.CharField(max_length=255, unique=False, null=True)
     created = CreationDateTimeField(_('created'))
     modified = ModificationDateTimeField(_('modified'))

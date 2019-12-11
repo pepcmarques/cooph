@@ -1,8 +1,9 @@
 from django.shortcuts import render
-from django.views.generic import ListView, CreateView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView, DeleteView
 
 from coop.messaging.forms import MessagingForm
-from coop.messaging.models import Message
+from coop.messaging.models import Message, MessageStatusChoice
 
 
 class Messaging(CreateView):
@@ -29,4 +30,13 @@ class MessagesList(ListView):
     ordering = ['-created']
 
     def get_queryset(self):
-        return Message.objects.filter(message_to=self.request.user.id)
+        status = MessageStatusChoice.choices()[0][0]  # status = OPEN
+        return Message.objects.filter(message_to=self.request.user.id, status=status)
+
+
+class MessagesDelete(DeleteView):
+    model = Message
+    # success_url = reverse_lazy('messaging:msg_list')
+
+    def get_success_url(self):
+        return reverse_lazy('messaging:msg_list', args=(self.request.user.id,))
