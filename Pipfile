@@ -8,6 +8,7 @@ flake8 = "*"
 pytest = "*"
 pytest-cov = "*"
 codecov = "*"
+pytest-mock = "*"
 
 [packages]
 certifi = "==2019.9.11"
@@ -25,6 +26,7 @@ psycopg2-binary = "*"
 whitenoise = "*"
 django-debug-toolbar = "*"
 django-extensions = "*"
+django-dynamic-fixture = "*"
 
 [requires]
 python_version = "3.7"

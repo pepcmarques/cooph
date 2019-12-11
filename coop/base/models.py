@@ -22,4 +22,4 @@ class Unit(models.Model):
         ordering = ['cooperative_id', 'unit_number']
 
     def __str__(self):
-        return self.unit_number
+        return str(self.unit_number)
