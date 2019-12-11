@@ -11,7 +11,7 @@
 			<thead class="thead-dark">
     			<tr>
       				<th scope="col">#</th>
-      				<th scope="col">Request</th>
+      				<th scope="col">Task</th>
       				<th scope="col">From</th>
       				<th scope="col">Note</th>
       				<th scope="col">Created on</th>
@@ -21,7 +21,7 @@
 				{% for item in message_list %}
 					<tr>
 						<td>{{ forloop.counter }}</td>
-						<td>{{ item.get_request_display }}</td>
+						<td>{{ item.get_task_display }}</td>
 						<td>{{ item.message_from }}</td>
 						<td>{{ item.note }}</td>
 						<td>{{ item.created }}</td>
