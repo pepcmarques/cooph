@@ -17,6 +17,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='message',
             name='status',
-            field=models.CharField(choices=[('OPEN', 'Open'), ('DONE', 'Done'), ('REJECT', 'Reject')], default='OPEN', max_length=6),
+            field=models.CharField(choices=[('OPEN', 'Open'), ('DONE', 'Done'), ('REJECT', 'Reject')], default='OPEN',
+                                   max_length=6),
         ),
     ]

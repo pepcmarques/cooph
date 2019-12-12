@@ -40,3 +40,7 @@ class MessagesDelete(DeleteView):
 
     def get_success_url(self):
         return reverse_lazy('messaging:msg_list', args=(self.request.user.id,))
+
+    def get_queryset(self):
+        pk = self.kwargs.get(self.pk_url_kwarg)
+        return Message.objects.filter(pk=pk)

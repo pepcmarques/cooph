@@ -7,5 +7,5 @@ app_name = 'messaging'
 urlpatterns = [
     path('', Messaging.as_view(), name='msg'),
     path('list/<int:user_id>/', MessagesList.as_view(), name='msg_list'),
-    path('reject/<int:pk>/', MessagesDelete.as_view(), name='reject'),
+    path('reject/<int:pk>/', MessagesDelete.as_view(), name='msg_reject'),
 ]

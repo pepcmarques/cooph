@@ -10,7 +10,7 @@
 {% block content %}
 <form method="post">
     {% csrf_token %}
-    <p>Are you sure you want to delete "{{ object }}"?</p>
+    <p>Are you sure you want to delete the task created on '{{ object.created }}' by '{{ object.message_from }}`?</p>
     <input type="submit" value="Confirm">
 </form>
 {% endblock content %}
