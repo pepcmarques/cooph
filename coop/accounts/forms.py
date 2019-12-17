@@ -1,6 +1,7 @@
 # accounts.forms.py
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField, UserCreationForm
+from django.utils.translation import ugettext_lazy
 
 from .models import User
 
@@ -16,6 +17,12 @@ class SignupForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('email',)
+
+
+class ForgottenPasswordForm(forms.Form):
+    email = forms.EmailField(
+        label=ugettext_lazy('Email'),
+        widget=forms.TextInput(attrs={'class': 'span3'}))
 
 
 class UserAdminCreationForm(forms.ModelForm):
