@@ -36,22 +36,26 @@
             <li>
               <span class="navbar-text username-divider"></span>
             </li>
-            <li>
-              <a href="{% url 'messaging:msg_list' user.id %}">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'messaging:msg_list' user.id %}">
                 <span data-toggle="tooltip" data-placement="bottom" data-container="body" title="Messages">
                   <span class="icon"><i class="far fa-envelope"></i></span>
                 </span>
               </a>
             </li>
-            <li>
-              <a href="{% url 'accounts:profile' user.id %}">
-                <span data-toggle="tooltip" data-placement="bottom" data-container="body" title="Account profile">
-                  <span class="icon"><i class="fa fa-cog"></i></span>
-                </span>
-              </a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span data-toggle="tooltip" data-placement="bottom" data-container="body" title="Account profile">
+                      <span class="icon"><i class="fa fa-cog"></i></span>
+                    </span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'accounts:profile' user.id %}">Profile</a>
+                    <a class="dropdown-item" href="{% url 'accounts:password_change' user.id%}">Change Password</a>
+                </div>
             </li>
-            <li>
-              <a href="{% url 'logout' %}">
+            <li class="nav-link">
+              <a class="nav-item" href="{% url 'logout' %}">
                 <span data-toggle="tooltip" data-placement="bottom" data-container="body" title="Sign out">
                   <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
                 </span>

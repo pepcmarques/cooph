@@ -1,7 +1,8 @@
 from django.urls import path
 from django.views.generic import TemplateView
 
-from coop.accounts.views import signup, update_user, delete_user, LoginView, activate, forgotten_password
+from coop.accounts.views import signup, update_user, delete_user, LoginView, activate, forgotten_password, \
+    password_change
 from coop.core.views import home
 
 app_name = 'accounts'
@@ -17,6 +18,7 @@ urlpatterns = [
     path('forgotten/', forgotten_password, name='forgotten'),
     path('forgotten/done/', TemplateView.as_view(template_name='forgotten_password_done.html'),
          name='forgotten_password_done'),
+    path('password_change/<int:user_id>/', password_change, name='password_change'),
 ]
 
 """
