@@ -15,7 +15,8 @@ from django.urls import reverse
 
 from coop.settings import SYSTEM_NAME
 from coop.accounts.models import User
-from coop.accounts.forms import LoginForm, UsersForm, UsersUpdateForm, SignupForm, ForgottenPasswordForm
+from coop.accounts.forms import LoginForm, UsersForm, UsersUpdateForm, SignupForm, ForgottenPasswordForm, \
+    PasswordChangeForm
 from coop.accounts.tokens import account_activation_token
 
 
@@ -138,13 +139,26 @@ def create_user(request):
 def update_user(request, user_id):
     if not request.user.is_superuser:
         if request.user.id != user_id:
-            return redirect('home')
+            return redirect(reverse('base:home'))
     user = User.objects.get(id=user_id)
     form = UsersUpdateForm(request.POST or None, instance=user)
     if form.is_valid():
         form.save()
         return redirect(reverse('base:home'))
     return render(request, 'user-form.html', {'form': form, 'user': user})
+
+
+def password_change(request, user_id):
+    if not request.user.is_superuser:
+        if request.user.id != user_id:
+            return redirect(reverse('base:home'))
+    user = User.objects.get(id=user_id)
+    form = PasswordChangeForm(request.POST or None, instance=user)
+    if form.is_valid():
+        form.save()
+        login(request, user)
+        return render(request,  'home.html', {'message': "Password was set!"})
+    return render(request, 'password_change.html', {'form': form, 'user': user})
 
 
 @user_passes_test(lambda u: u.is_superuser)
