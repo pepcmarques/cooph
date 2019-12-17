@@ -1,11 +1,11 @@
 import pytest
 
 from coop.messaging.models import Message
-from coop.messaging.models import MessageChoice
+from coop.messaging.models import MessageTaskChoice
 
 
 @pytest.mark.parametrize(
-    "task", [MessageChoice.choices()[0][0]]
+    "task", [MessageTaskChoice.choices()[0][0]]
 )
 def test_messaging_model(client, task):
     message = Message()

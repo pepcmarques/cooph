@@ -1,7 +1,7 @@
 import pytest
 
 from coop.accounts.models import User
-from coop.messaging.models import MessageChoice
+from coop.messaging.models import MessageTaskChoice
 from coop.messaging.forms import MessagingForm
 
 from django import urls
@@ -17,7 +17,7 @@ def test_task_list(client, authenticated_user):
 @pytest.mark.django_db
 @pytest.mark.parametrize(
     'task, note, validity',
-    [(MessageChoice.choices()[0], "Coop Test Form Creation", True),
+    [(MessageTaskChoice.choices()[0], "Coop Test Form Creation", True),
      ])
 def test_message_form(client, authenticated_user, task, note, validity):
     user = User.objects.get(email=authenticated_user)

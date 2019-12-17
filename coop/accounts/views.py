@@ -5,6 +5,9 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_text
+from django.views.decorators.cache import never_cache
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import FormView
 from django.shortcuts import redirect, render
 from django.utils.http import is_safe_url, urlsafe_base64_encode, urlsafe_base64_decode
@@ -12,7 +15,7 @@ from django.urls import reverse
 
 from coop.settings import SYSTEM_NAME
 from coop.accounts.models import User
-from coop.accounts.forms import LoginForm, UsersForm, UsersUpdateForm, SignupForm
+from coop.accounts.forms import LoginForm, UsersForm, UsersUpdateForm, SignupForm, ForgottenPasswordForm
 from coop.accounts.tokens import account_activation_token
 
 
@@ -43,6 +46,17 @@ def logout_view(request):
     return redirect('/')
 
 
+def build_message(request, template, user):
+    current_site = get_current_site(request)
+    message = render_to_string(template, {
+        'user': user,
+        'domain': current_site.domain,
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': account_activation_token.make_token(user),
+    })
+    return message
+
+
 def signup(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
@@ -50,19 +64,13 @@ def signup(request):
             user = form.save(commit=False)
             user.is_active = False
             user.save()
-            current_site = get_current_site(request)
+            #
             mail_subject = 'Activate your {0} account.'.format(SYSTEM_NAME)
-            message = render_to_string('acc_active_email.html', {
-                'user': user,
-                'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': account_activation_token.make_token(user),
-            })
+            message = build_message(request, "acc_active_email.html", user)
             to_email = form.cleaned_data.get('email')
-            email = EmailMessage(
-                        mail_subject, message, to=[to_email]
-            )
+            email = EmailMessage(mail_subject, message, to=[to_email])
             email.send()
+            #
             return render(request, 'home.html', {'message': 'Please confirm your email address to complete '
                                                             'the registration'})
     else:
@@ -81,9 +89,32 @@ def activate(request, uidb64, token):
         user.save()
         login(request, user)
         return render(request,  'home.html',
-                      {'message': "Thank you for your email confirmation. Now you can login your account."})
+                      {'message': "Thank you for clicking on the link. Now you can start using the system."})
     else:
         return render(request, 'home.html', {'message': 'Activation link is invalid!'})
+
+
+@sensitive_post_parameters()
+@csrf_protect
+@never_cache
+def forgotten_password(request):
+    if request.method == 'POST':
+        form = ForgottenPasswordForm(request.POST)
+        if form.is_valid():
+            user = User.objects.filter(email=form.cleaned_data['email'])
+            if user:
+                user = user[0]  # first and only user
+                #
+                mail_subject = 'Password reset for your {0} account.'.format(SYSTEM_NAME)
+                message = build_message(request, "acc_reset_password.html", user)
+                to_email = form.cleaned_data.get('email')
+                email = EmailMessage(mail_subject, message, to=[to_email])
+                email.send()
+                #
+            return redirect('accounts:forgotten_password_done')
+    else:
+        form = ForgottenPasswordForm()
+    return render(request, 'forgotten.html', {'form': form})
 
 
 def profile(request, user_id):
