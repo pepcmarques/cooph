@@ -1,4 +1,5 @@
-# cooph
+# CoopSys
+
 Cooperative Housing System
 
 Application available at https://cooph.herokuapp.com/
